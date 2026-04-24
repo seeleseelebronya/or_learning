@@ -2,6 +2,10 @@
 A interface for modules of characters.
 """
 
+from normal_attack import NA
+from skill import Skill
+from ultimate import Ultimate
+
 
 class Module:
     def __init__(self, energy: int, na: NA, skill: Skill, ultimate: Ultimate):

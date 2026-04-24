@@ -9,7 +9,7 @@ class Skill:
         The constructor of skill module.
 
         Args:
-            sp: Cost of sp. 1 means use a sp; -1 means add a sp, etc.
+            sp: Delta of sp. -1 means use a sp; 1 means add a sp, etc.
             energy: The number of energy that will be add after skill.
             damage: The damage of skill.
         """
