@@ -18,5 +18,6 @@ resault = linprog(c, A_ub=A, b_ub=b, bounds=[x_bounds, x_bounds], method="highs"
 if resault.success:
     print(f"Yen asset: {resault.x[0]:.2f}, USD asset: {resault.x[1]:.2f}")
     print(f"Prof: {-resault.fun:.2f}")
+    print(f"Marginals: {resault.ineqlin.marginals}")
 else:
     print("Failure")
