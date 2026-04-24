@@ -45,5 +45,5 @@ def main():
     print(f"Total damage: {total_damage}")
 
 
-if __name__ == "__name__":
+if __name__ == "__main__":
     main()
