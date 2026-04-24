@@ -41,6 +41,7 @@ def main():
 
         if seele.get_energy() == seele.module.get_max_energy():
             delta_sp, damage = seele.take_action("Q")
+            total_damage += damage
 
     print(f"Total damage: {total_damage}")
 
