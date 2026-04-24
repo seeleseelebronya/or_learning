@@ -69,7 +69,7 @@ class Character:
                     self.change_energy(
                         self.module.get_ultimate().energy - self.module.max_energy
                     )
-                    damage = self.module.get_ultimate().energy
+                    damage = self.module.get_ultimate().get_damage()
             case _:
                 raise KeyError
         return delta_sp, damage
