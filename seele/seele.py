@@ -2,6 +2,8 @@
 The character seele.
 """
 
+from functools import lru_cache
+
 from character import Character
 from module import Module
 from normal_attack import NA
@@ -44,6 +46,44 @@ def main():
             total_damage += damage
 
     print(f"Total damage: {total_damage}")
+
+    seele1 = Seele()
+    max_damage = solve(seele1, TOTAL_ACTIONS, seele1.get_energy(), INIT_SP)
+    print(f"Max damage: {max_damage}")
+
+
+@lru_cache(None)
+def solve(c: Character, n: int, e: int, sp: int) -> int:
+    """
+    Use DP to find the max damage.
+    Args:
+        c: The Character.
+        n: Left actions.
+        e: Current energy.
+        sp: Current SP.
+    Returns: The max damage.
+    """
+    if n == 0:
+        return 0
+
+    ultimate = c.get_module().get_ultimate()
+    if e >= c.get_module().get_max_energy():
+        res_ultimate = ultimate.get_damage() + solve(c, n, ultimate.get_energe(), sp)
+    else:
+        res_ultimate = -1
+
+    na = c.get_module().get_na()
+    res_na = na.get_damage() + solve(c, n - 1, e + na.get_energy(), sp + na.get_sp())
+
+    skill = c.get_module().get_skill()
+    if sp > 0:
+        res_skill = skill.get_damage() + solve(
+            c, n - 1, e + skill.get_energy(), sp + skill.get_sp()
+        )
+    else:
+        res_skill = -1
+
+    return round(max(res_na, res_skill, res_ultimate))
 
 
 if __name__ == "__main__":
